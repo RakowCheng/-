@@ -1,7 +1,19 @@
 {
   "calendar_name": "廿四格中期安排",
-  "last_updated": "2026-07-04T02:00:00+08:00",
+  "last_updated": "2026-07-05T02:00:00+08:00",
   "events": [
+    {
+      "summary": "刘杰坚休息",
+      "start_time": "2026-07-05",
+      "end_time": "2026-07-05",
+      "is_all_day": true,
+      "organizer": "程锐泓",
+      "status": "confirmed",
+      "free_busy_status": "free",
+      "description": "",
+      "location": null,
+      "app_link": "https://applink.feishu.cn/client/calendar/event/detail?calendarId=7329871293720756228&key=daa142b3-7ccb-4cb4-bc9c-df35b197056e&originalTime=0&startTime=1783180800"
+    },
     {
       "summary": "试驾会",
       "start_time": "2026-07-11",
