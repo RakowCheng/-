@@ -1,42 +1,24 @@
 {
   "calendar_name": "廿四格中期安排",
-  "last_updated": "2026-07-05T02:00:00+08:00",
+  "calendar_id": "feishu.cn_4qY5xHWovPr7lYhkztLKub@group.calendar.feishu.cn",
+  "last_updated": "2026-07-06T02:00:00+08:00",
+  "sync_range": "2026-07-06 ~ 2026-08-05",
   "events": [
-    {
-      "summary": "刘杰坚休息",
-      "start_time": "2026-07-05",
-      "end_time": "2026-07-05",
-      "is_all_day": true,
-      "organizer": "程锐泓",
-      "status": "confirmed",
-      "free_busy_status": "free",
-      "description": "",
-      "location": null,
-      "app_link": "https://applink.feishu.cn/client/calendar/event/detail?calendarId=7329871293720756228&key=daa142b3-7ccb-4cb4-bc9c-df35b197056e&originalTime=0&startTime=1783180800"
-    },
     {
       "summary": "试驾会",
       "start_time": "2026-07-11",
       "end_time": "2026-07-12",
-      "is_all_day": true,
       "organizer": "陈图元",
       "status": "confirmed",
-      "free_busy_status": "free",
-      "description": "",
-      "location": null,
-      "app_link": "https://applink.feishu.cn/client/calendar/event/detail?calendarId=7329871293720756228&key=95f87224-fa3c-41f4-820d-9298d2f0d503&originalTime=0&startTime=1783728000"
+      "event_id": "95f87224-fa3c-41f4-820d-9298d2f0d503_0"
     },
     {
       "summary": "路特东莞工厂拍摄",
       "start_time": "2026-07-23",
       "end_time": "2026-07-24",
-      "is_all_day": true,
       "organizer": "程锐泓",
       "status": "confirmed",
-      "free_busy_status": "free",
-      "description": "",
-      "location": null,
-      "app_link": "https://applink.feishu.cn/client/calendar/event/detail?calendarId=7329871293720756228&key=efc57730-47a0-47b7-9735-c71365b0010e&originalTime=0&startTime=1784764800"
+      "event_id": "efc57730-47a0-47b7-9735-c71365b0010e_0"
     }
   ]
 }
