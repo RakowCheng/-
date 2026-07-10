@@ -1,8 +1,8 @@
 {
   "calendar_name": "廿四格中期安排",
   "calendar_id": "feishu.cn_4qY5xHWovPr7lYhkztLKub@group.calendar.feishu.cn",
-  "last_updated": "2026-07-10T02:00:00+08:00",
-  "sync_range": "2026-07-10 ~ 2026-08-09",
+  "last_updated": "2026-07-11T02:00:00+08:00",
+  "sync_range": "2026-07-11 ~ 2026-08-10",
   "events": [
     {
       "summary": "试驾会拍摄",
@@ -38,6 +38,15 @@
       "organizer": "程锐泓",
       "status": "confirmed",
       "event_id": "9752bd71-cfee-4c74-bca3-0267d66a5529_0"
+    },
+    {
+      "summary": "慈善会夏令营开营",
+      "start_time": "2026-07-13",
+      "end_time": "2026-07-14",
+      "organizer": "程锐泓",
+      "description": "拍摄通知@Rakow Cheng\n活动：夏令营开营\n时间：2026年7月13日星期一上午9点\n集中地点：伦教慈善综合体\n联系人：镓敏",
+      "status": "confirmed",
+      "event_id": "d4869db9-5926-41a9-ada8-fcf39cc3b71d_0"
     },
     {
       "summary": "原生密码直播间调试",
