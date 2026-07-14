@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>🎬 赛博开机拜拜</title>
+<style>
+  :root {
+    --red: #c0392b;
+    --gold: #f39c12;
+    --dark: #1a1a1a;
+    --cream: #fdf6e3;
+    --wood: #8b4513;
+    --smoke: rgba(200,200,200,0.6);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei",serif;
+    background: var(--dark);
+    color: var(--cream);
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ===== Header ===== */
+  .header {
+    text-align: center;
+    padding: 20px 16px 10px;
+    width: 100%;
+  }
+  .logo { height: 48px; margin-bottom: 8px; }
+  .header h1 {
+    font-size: 1.6rem;
+    color: var(--gold);
+    text-shadow: 0 2px 8px rgba(243,156,18,0.3);
+    letter-spacing: 4px;
+  }
+
+  /* ===== Couplets ===== */
+  .couplets {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 10px 0;
+    width: 100%;
+    padding: 0 16px;
+  }
+  .couplet {
+    background: var(--red);
+    color: var(--gold);
+    padding: 12px 10px;
+    border-radius: 6px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    letter-spacing: 6px;
+    box-shadow: 0 4px 16px rgba(192,57,43,0.4);
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ===== Incense Burner ===== */
+  .burner-section {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    height: 320px;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .incense-container {
+    position: absolute;
+    bottom: 100px;
+    display: flex;
+    gap: 28px;
+    align-items: flex-end;
+  }
+  .incense {
+    width: 4px;
+    height: 100px;
+    background: linear-gradient(to top, var(--wood), #a0522d);
+    border-radius: 2px;
+    position: relative;
+  }
+  .incense.lit { box-shadow: 0 0 8px rgba(255,100,0,0.5); }
+  .incense-tip {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, #ff4500, #ff6600, transparent);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+  .incense.lit .incense-tip { opacity: 1; animation: glow 1.5s ease-in-out infinite; }
+  @keyframes glow {
+    0%,100% { box-shadow: 0 0 6px #ff4500, 0 0 12px #ff660044; }
+    50% { box-shadow: 0 0 12px #ff4500, 0 0 24px #ff660066; }
+  }
+
+  /* Smoke */
+  .smoke-particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: radial-gradient(circle, var(--smoke), transparent);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: smoke-rise 3s ease-out forwards;
+  }
+  @keyframes smoke-rise {
+    0% { opacity: 0.7; transform: translateY(0) scale(1); }
+    50% { opacity: 0.4; transform: translateY(-60px) translateX(10px) scale(2); }
+    100% { opacity: 0; transform: translateY(-140px) translateX(-5px) scale(3); }
+  }
+
+  /* Burner */
+  .burner {
+    width: 120px;
+    height: 70px;
+    background: linear-gradient(135deg, #b8860b, #daa520, #b8860b);
+    border-radius: 8px 8px 16px 16px;
+    position: relative;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  }
+  .burner::before {
+    content: "香炉";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 1.2rem;
+    color: var(--red);
+    font-weight: bold;
+  }
+  .burner-base {
+    width: 140px;
+    height: 14px;
+    background: linear-gradient(135deg, #8b6914, #c9a227, #8b6914);
+    border-radius: 0 0 20px 20px;
+    margin-top: -2px;
+  }
+
+  /* ===== Offerings ===== */
+  .offerings-section {
+    width: 100%;
+    max-width: 400px;
+    padding: 0 16px;
+    margin: 10px 0;
+  }
+  .offerings-section h2 {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .offerings-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .offering {
+    background: #2a2a2a;
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding: 12px 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    user-select: none;
+  }
+  .offering:hover { border-color: var(--gold); }
+  .offering.selected {
+    border-color: var(--gold);
+    background: #332a1a;
+    box-shadow: 0 0 12px rgba(243,156,18,0.3);
+  }
+  .offering .emoji { font-size: 2rem; display: block; margin-bottom: 4px; }
+  .offering .name { font-size: 0.8rem; color: #aaa; }
+  .offering.selected .name { color: var(--gold); }
+  .offering-count {
+    text-align: center;
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: #888;
+  }
+
+  /* ===== Worship Button ===== */
+  .worship-area {
+    width: 100%;
+    max-width: 400px;
+    padding: 16px;
+    text-align: center;
+  }
+  .btn-worship {
+    background: linear-gradient(135deg, var(--red), #e74c3c);
+    color: var(--gold);
+    border: none;
+    padding: 14px 40px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    letter-spacing: 4px;
+    box-shadow: 0 4px 20px rgba(192,57,43,0.5);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-worship:hover { transform: scale(1.05); box-shadow: 0 6px 28px rgba(192,57,43,0.7); }
+  .btn-worship:active { transform: scale(0.97); }
+  .btn-worship.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  /* ===== Wooden Fish ===== */
+  .fish-section {
+    width: 100%;
+    max-width: 400px;
+    padding: 16px;
+    text-align: center;
+  }
+  .fish-section h2 {
+    font-size: 1rem;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .wooden-fish {
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle at 40% 40%, #a0522d, #6b3410);
+    border-radius: 50%;
+    margin: 0 auto 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5), inset 0 -4px 8px rgba(0,0,0,0.3);
+    transition: transform 0.1s;
+    user-select: none;
+  }
+  .wooden-fish:active { transform: scale(0.9); }
+  .merit-count {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 8px;
+  }
+  .fish-phrase {
+    min-height: 24px;
+    font-size: 0.95rem;
+    color: var(--gold);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .fish-phrase.show { opacity: 1; }
+
+  /* ===== Calendar ===== */
+  .calendar-section {
+    width: 100%;
+    max-width: 400px;
+    padding: 16px;
+    margin: 10px 0 30px;
+  }
+  .calendar-section h2 {
+    font-size: 1rem;
+    color: var(--gold);
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .event-card {
+    background: #2a2a2a;
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+  }
+  .event-card .event-name {
+    font-size: 0.95rem;
+    color: var(--cream);
+    font-weight: bold;
+  }
+  .event-card .event-date {
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 2px;
+  }
+  .event-card .event-desc {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-top: 4px;
+  }
+  .event-card .event-loc {
+    font-size: 0.75rem;
+    color: #666;
+    margin-top: 2px;
+  }
+  .calendar-empty {
+    text-align: center;
+    color: #555;
+    font-size: 0.85rem;
+    padding: 20px;
+  }
+
+  /* ===== Blessing Modal ===== */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: linear-gradient(135deg, #2a1a0a, #1a0a00);
+    border: 2px solid var(--gold);
+    border-radius: 16px;
+    padding: 30px 24px;
+    text-align: center;
+    max-width: 320px;
+    width: 90%;
+    animation: modal-in 0.4s ease-out;
+  }
+  @keyframes modal-in {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .modal .blessing { font-size: 1.8rem; color: var(--gold); margin-bottom: 12px; }
+  .modal .sub { font-size: 0.9rem; color: #aaa; margin-bottom: 20px; }
+  .modal .btn-close {
+    background: var(--red);
+    color: var(--cream);
+    border: none;
+    padding: 10px 30px;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  /* ===== Particles ===== */
+  .particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 999;
+    font-size: 1.5rem;
+    animation: particle-fly 1.5s ease-out forwards;
+  }
+  @keyframes particle-fly {
+    0% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-200px) translateX(var(--dx)) scale(0.3); }
+  }
+
+  /* ===== Footer ===== */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.75rem;
+    color: #444;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 380px) {
+    .header h1 { font-size: 1.3rem; }
+    .couplet { font-size: 1.1rem; padding: 10px 8px; }
+    .offerings-grid { gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🎬 赛博开机拜拜</h1>
+</div>
+
+<div class="couplets">
+  <div class="couplet">开机大吉</div>
+  <div class="couplet">万事如意</div>
+</div>
+
+<div class="burner-section">
+  <div class="incense-container" id="incenseContainer">
+    <div class="incense" id="incense0"><div class="incense-tip"></div></div>
+    <div class="incense" id="incense1"><div class="incense-tip"></div></div>
+    <div class="incense" id="incense2"><div class="incense-tip"></div></div>
+  </div>
+  <div class="burner"></div>
+  <div class="burner-base"></div>
+</div>
+
+<div class="offerings-section">
+  <h2>🍎 贡品台（选3样）</h2>
+  <div class="offerings-grid" id="offeringsGrid"></div>
+  <div class="offering-count" id="offeringCount">已选 0/3</div>
+</div>
+
+<div class="worship-area">
+  <button class="btn-worship" id="btnWorship" onclick="doWorship()">🙏 拜一拜</button>
+</div>
+
+<div class="fish-section">
+  <h2>🪵 敲木鱼</h2>
+  <div class="wooden-fish" id="woodenFish" onclick="hitFish()">🐟</div>
+  <div class="merit-count">功德: <span id="meritCount">0</span></div>
+  <div class="fish-phrase" id="fishPhrase"></div>
+</div>
+
+<div class="calendar-section">
+  <h2>📅 廿四格中期安排</h2>
+  <div id="calendarEvents"><div class="calendar-empty">加载中...</div></div>
+</div>
+
+<div class="modal-overlay" id="blessingModal">
+  <div class="modal">
+    <div class="blessing" id="blessingText"></div>
+    <div class="sub" id="blessingSub"></div>
+    <button class="btn-close" onclick="closeModal()">🙏 收到</button>
+  </div>
+</div>
+
+<div class="footer">24FPS STUDIO · 赛博拜拜，心诚则灵</div>
+
+<script>
+// ===== Offerings =====
+const OFFERINGS = [
+  { emoji: '🍎', name: '苹果' },
+  { emoji: '🍊', name: '橘子' },
+  { emoji: '🍌', name: '香蕉' },
+  { emoji: '🧁', name: '蛋糕' },
+  { emoji: '🍺', name: '啤酒' },
+  { emoji: '🥤', name: '奶茶' },
+  { emoji: '🍖', name: '烧肉' },
+  { emoji: '🌸', name: '鲜花' },
+  { emoji: '💰', name: '元宝' },
+];
+let selectedOfferings = new Set();
+
+function renderOfferings() {
+  const grid = document.getElementById('offeringsGrid');
+  grid.innerHTML = OFFERINGS.map((o, i) => `
+    <div class="offering ${selectedOfferings.has(i)?'selected':''}" onclick="toggleOffering(${i})">
+      <span class="emoji">${o.emoji}</span>
+      <span class="name">${o.name}</span>
+    </div>
+  `).join('');
+  document.getElementById('offeringCount').textContent = `已选 ${selectedOfferings.size}/3`;
+}
+
+function toggleOffering(i) {
+  if (selectedOfferings.has(i)) {
+    selectedOfferings.delete(i);
+  } else if (selectedOfferings.size < 3) {
+    selectedOfferings.add(i);
+  }
+  renderOfferings();
+}
+renderOfferings();
+
+// ===== Incense Smoke =====
+let smokeInterval = null;
+function startSmoke() {
+  [0,1,2].forEach(i => document.getElementById('incense'+i).classList.add('lit'));
+  smokeInterval = setInterval(() => {
+    [0,1,2].forEach(i => {
+      const el = document.getElementById('incense'+i);
+      const p = document.createElement('div');
+      p.className = 'smoke-particle';
+      p.style.left = (el.offsetLeft + el.offsetWidth/2 - 3 + (Math.random()-0.5)*10) + 'px';
+      p.style.top = (el.offsetTop - 10) + 'px';
+      el.parentElement.appendChild(p);
+      setTimeout(() => p.remove(), 3000);
+    });
+  }, 300);
+}
+
+// ===== Worship =====
+const BLESSINGS = [
+  { title: '🎬 开机大吉', sub: '灯光到位，摄影就绪，Action！' },
+  { title: '✨ 万事如意', sub: '甲方不改稿，一条过！' },
+  { title: '🎥 拍摄顺利', sub: '无NG，无穿帮，完美收工！' },
+  { title: '🌟 灵感爆棚', sub: '创意无限，方案秒过！' },
+  { title: '💰 预算充足', sub: '设备全到位，不差钱！' },
+  { title: '🎯 一镜到底', sub: '技术与艺术的完美结合！' },
+  { title: '🌈 天气给力', sub: '外景拍摄，阳光正好！' },
+  { title: '🔥 效率拉满', sub: '提前收工，准时下班！' },
+];
+let worshipDone = false;
+
+function doWorship() {
+  if (worshipDone) return;
+  if (selectedOfferings.size < 3) {
+    alert('请先选3样贡品！🙏');
+    return;
+  }
+  worshipDone = true;
+  document.getElementById('btnWorship').classList.add('disabled');
+  document.getElementById('btnWorship').textContent = '🙏 已拜';
+
+  // Start smoke
+  startSmoke();
+
+  // Particle effects
+  const particles = ['✨','🌟','⭐','💫','🎊','🎉','🔥','💥'];
+  for (let i = 0; i < 20; i++) {
+    setTimeout(() => {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.textContent = particles[Math.floor(Math.random()*particles.length)];
+      p.style.left = (window.innerWidth/2 + (Math.random()-0.5)*200) + 'px';
+      p.style.top = (window.innerHeight/2 + (Math.random()-0.5)*100) + 'px';
+      p.style.setProperty('--dx', ((Math.random()-0.5)*150)+'px');
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 1500);
+    }, i * 80);
+  }
+
+  // Show blessing
+  setTimeout(() => {
+    const b = BLESSINGS[Math.floor(Math.random()*BLESSINGS.length)];
+    document.getElementById('blessingText').textContent = b.title;
+    document.getElementById('blessingSub').textContent = b.sub;
+    document.getElementById('blessingModal').classList.add('show');
+  }, 800);
+}
+
+function closeModal() {
+  document.getElementById('blessingModal').classList.remove('show');
+}
+
+// ===== Wooden Fish =====
+const FISH_PHRASES = [
+  '功德+1 🙏', '甲方快乐', '一条过！', '不改稿！',
+  '灵感来了', '预算翻倍', '设备到位', '天气晴朗',
+  '收工吃饭', '甲方审美在线', '拍摄顺利', '后期不加班',
+  '创意通过', '报价翻倍', '客户满意', '导演开心',
+  '灯光完美', '收音清晰', '焦点没虚', '色温统一',
+  '素材安全', '硬盘没坏', '备份到位', '粗剪秒过',
+  '调色出片', '甲方不催', '尾款秒结', '下个项目来',
+  '航拍没炸', '电池够用', '内存没满', '卡没录满',
+];
+let merit = 0;
+let fishTimer = null;
+
+function hitFish() {
+  merit++;
+  document.getElementById('meritCount').textContent = merit;
+  const el = document.getElementById('woodenFish');
+  el.style.transform = 'scale(0.85)';
+  setTimeout(() => el.style.transform = '', 100);
+
+  const phrase = FISH_PHRASES[Math.floor(Math.random()*FISH_PHRASES.length)];
+  const pEl = document.getElementById('fishPhrase');
+  pEl.textContent = phrase;
+  pEl.classList.add('show');
+  clearTimeout(fishTimer);
+  fishTimer = setTimeout(() => pEl.classList.remove('show'), 1500);
+}
+
+// ===== Calendar =====
+async function loadCalendar() {
+  try {
+    const res = await fetch('projects.json?' + Date.now());
+    const data = await res.json();
+    const events = data.events || [];
+    const container = document.getElementById('calendarEvents');
+
+    if (!events.length) {
+      container.innerHTML = '<div class="calendar-empty">暂无近期安排</div>';
+      return;
+    }
+
+    // Sort by start_date
+    events.sort((a,b) => a.start_date.localeCompare(b.start_date));
+
+    // Show upcoming + recent (within 7 days)
+    const now = new Date();
+    const today = now.toISOString().slice(0,10);
+    const filtered = events.filter(e => e.end_date >= today);
+
+    if (!filtered.length) {
+      container.innerHTML = '<div class="calendar-empty">暂无近期安排</div>';
+      return;
+    }
+
+    container.innerHTML = filtered.slice(0, 10).map(e => {
+      const dateStr = e.start_date === e.end_date ? e.start_date : `${e.start_date} ~ ${e.end_date}`;
+      return `
+        <div class="event-card">
+          <div class="event-name">${escHtml(e.name)}</div>
+          <div class="event-date">${dateStr}</div>
+          ${e.description ? `<div class="event-desc">${escHtml(e.description)}</div>` : ''}
+          ${e.location ? `<div class="event-loc">📍 ${escHtml(e.location)}</div>` : ''}
+        </div>
+      `;
+    }).join('');
+  } catch(e) {
+    document.getElementById('calendarEvents').innerHTML = '<div class="calendar-empty">加载失败</div>';
+  }
+}
+
+function escHtml(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+loadCalendar();
+</script>
+</body>
+</html>
