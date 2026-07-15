@@ -1,25 +1,10 @@
 {
   "calendar_name": "廿四格中期安排",
   "calendar_id": "feishu.cn_4qY5xHWovPr7lYhkztLKub@group.calendar.feishu.cn",
-  "last_updated": "2026-07-15T02:00:00+08:00",
-  "sync_range": "2026-07-15 ~ 2026-08-14",
-  "total_events": 13,
+  "last_updated": "2026-07-16T02:00:00+08:00",
+  "sync_range": "2026-07-16 ~ 2026-08-15",
+  "total_events": 11,
   "events": [
-    {
-      "summary": "龙生器材租赁",
-      "start_time": "2026-07-12",
-      "end_time": "2026-07-15",
-      "description": "7.13龙生租赁计价单",
-      "organizer": "程锐泓",
-      "status": "confirmed"
-    },
-    {
-      "summary": "伦教慈善会夏令营拍摄",
-      "start_time": "2026-07-15T08:30:00+08:00",
-      "end_time": "2026-07-15T17:30:00+08:00",
-      "organizer": "程锐泓",
-      "status": "confirmed"
-    },
     {
       "summary": "路特平面拍摄日",
       "start_time": "2026-07-16",
@@ -63,16 +48,16 @@
       "status": "confirmed"
     },
     {
-      "summary": "伦教慈善会拍摄",
-      "start_time": "2026-07-23T08:30:00+08:00",
-      "end_time": "2026-07-23T17:30:00+08:00",
+      "summary": "路特花生片场拍摄",
+      "start_time": "2026-07-23",
+      "end_time": "2026-07-24",
       "organizer": "程锐泓",
       "status": "confirmed"
     },
     {
-      "summary": "路特花生片场拍摄",
-      "start_time": "2026-07-23",
-      "end_time": "2026-07-24",
+      "summary": "伦教慈善会拍摄",
+      "start_time": "2026-07-23T08:30:00+08:00",
+      "end_time": "2026-07-23T17:30:00+08:00",
       "organizer": "程锐泓",
       "status": "confirmed"
     },
@@ -87,7 +72,6 @@
       "summary": "罗国栋休息",
       "start_time": "2026-07-25T00:00:00+08:00",
       "end_time": "2026-07-25T23:59:59+08:00",
-      "description": "罗国栋 2026-07-25 休息一天",
       "organizer": "程锐泓",
       "status": "confirmed"
     },
